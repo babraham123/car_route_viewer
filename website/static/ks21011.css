@@ -1,0 +1,188 @@
+.mstheme
+{
+	separator-image: url(amodrule.gif);
+	list-image-1: url(amodbul1.gif);
+	list-image-2: url(amodbul2.gif);
+	list-image-3: url(amodbul3.gif);
+	nav-banner-image: url(amodbanr.gif);
+	navbutton-horiz-normal: url(amodhbtn.gif);
+	navbutton-horiz-hovered: url(amodhhov.gif);
+	navbutton-horiz-pushed: url(amodhsel.gif);
+	navbutton-vert-normal: url(amodvbtn.gif);
+	navbutton-vert-hovered: url(amodvhov.gif);
+	navbutton-vert-pushed: url(amodvsel.gif);
+	navbutton-home-normal: url(amodhom.gif);
+	navbutton-home-hovered: url(amodhomh.gif);
+	navbutton-home-pushed: url(amodhom.gif);
+	navbutton-next-normal: url(amodnxt.gif);
+	navbutton-next-hovered: url(amodnxth.gif);
+	navbutton-next-pushed: url(amodnxt.gif);
+	navbutton-prev-normal: url(amodbck.gif);
+	navbutton-prev-hovered: url(amodbckh.gif);
+	navbutton-prev-pushed: url(amodbck.gif);
+	navbutton-up-normal: url(amodup.gif);
+	navbutton-up-hovered: url(amoduph.gif);
+	navbutton-up-pushed: url(amodup.gif);
+}
+.mstheme-bannertxt
+{
+	font-family: Verdana, Arial, Helvetica;
+	color: rgb(0, 0, 0);
+	font-size: 6;
+	font-style: normal;
+	font-weight: normal;
+}
+.mstheme-horiz-navtxt
+{
+	font-family: Trebuchet MS, Arial, Helvetica;
+	color: rgb(0, 0, 0);
+	font-size: 2;
+	font-style: normal;
+	font-weight: normal;
+}
+.mstheme-vert-navtxt
+{
+	font-family: Trebuchet MS, Arial, Helvetica;
+	color: rgb(0, 0, 0);
+	font-size: 2;
+	font-style: normal;
+	font-weight: normal;
+}
+.mstheme-navtxthome
+{
+	font-family: Trebuchet MS, Arial, Helvetica;
+	color: rgb(0, 0, 0);
+	font-size: 1;
+	font-style: normal;
+	font-weight: normal;
+}
+.mstheme-navtxtnext
+{
+	font-family: Trebuchet MS, Arial, Helvetica;
+	color: rgb(0, 0, 0);
+	font-size: 1;
+	font-style: normal;
+	font-weight: normal;
+}
+.mstheme-navtxtprev
+{
+	font-family: Trebuchet MS, Arial, Helvetica;
+	color: rgb(0, 0, 0);
+	font-size: 1;
+	font-style: normal;
+	font-weight: normal;
+}
+.mstheme-navtxtup
+{
+	font-family: Trebuchet MS, Arial, Helvetica;
+	color: rgb(0, 0, 0);
+	font-size: 1;
+	font-style: normal;
+	font-weight: normal;
+}
+ul
+{
+	list-style-image: url(amodbul1.gif);
+}
+ul ul
+{
+	list-style-image: url(amodbul2.gif);
+}
+ul ul ul
+{
+	list-style-image: url(amodbul3.gif);
+}
+a:link
+{
+	color: rgb(51, 51, 51);
+}
+a:active
+{
+	color: rgb(255, 0, 0);
+}
+a:visited
+{
+	color: rgb(0, 51, 0);
+}
+body
+{
+	background-color: rgb(255, 255, 255);
+	color: rgb(0, 0, 0);
+}
+table
+{
+	table-border-color-light: rgb(51, 51, 51);
+	table-border-color-dark: rgb(51, 51, 51);
+	border-color: rgb(51, 51, 51);
+}
+th
+{
+	border-color: rgb(51, 51, 51);
+}
+td
+{
+	border-color: rgb(51, 51, 51);
+}
+h1
+{
+	color: rgb(0, 0, 0);
+}
+h2
+{
+	color: rgb(0, 0, 0);
+}
+h3
+{
+	color: rgb(0, 0, 0);
+}
+h4
+{
+	color: rgb(0, 0, 0);
+}
+h5
+{
+	color: rgb(0, 0, 0);
+}
+h6
+{
+	color: rgb(0, 0, 0);
+}
+hr
+{
+	color: rgb(51, 0, 153);
+}
+button
+{
+	background-color: rgb(0, 0, 0);
+	color: rgb(255, 255, 255);
+}
+label
+{
+	color: rgb(0, 0, 0);
+}
+.mstheme-text
+{
+	background-color: rgb(0, 0, 0);
+	color: rgb(11, 0, 0);
+}
+textarea
+{
+	color: rgb(0, 0, 0);
+}
+fieldset
+{
+	color: rgb(0, 0, 0);
+}
+legend
+{
+	color: rgb(0, 0, 0);
+}
+select
+{
+	color: rgb(0, 0, 0);
+}
+caption
+{
+	color: rgb(0, 0, 0);
+}
+.mstheme { top-bar-button: url(modglobl.gif); navbutton-background-color: rgb(255,255,255);  } .mstheme-topbar-font { font-size: 8pt; font-family: Trebuchet MS, Arial, Helvetica; color: rgb(0,0,0);  } body { font-family: Arial; font-style: normal; text-align: none; font-weight: normal; font-size: 10pt; vertical-align: none;  } button { border-top-style: solid; border-bottom-width: 1pt; border-left-width: 1pt; border-top-width: 1pt; border-right-width: 1pt; font-family: Trebuchet MS, Arial, Helvetica; font-style: normal; border-bottom-style: solid; border-left-style: solid; border-right-style: solid; font-size: 10pt;  } caption { font-size: 14pt; font-family: Verdana, Arial, Helvetica; font-style: normal;  } fieldset { border-top-style: solid; border-left-style: solid; border-bottom-width: 1pt; font-family: Trebuchet MS, Arial, Helvetica; font-size: 8pt; border-top-width: 1pt; border-right-style: solid; border-left-width: 1pt; font-style: normal; border-right-width: 1pt; border-bottom-style: solid;  } h1 { font-family: arial; font-style: normal; font-weight: normal; vertical-align: none; text-align: none; font-size: 24pt;  } h2 { font-style: normal; vertical-align: none; font-size: 18pt; font-weight: normal; text-align: none; font-family: arial;  } h3 { font-weight: normal; font-style: normal; font-family: Verdana, Arial, Helvetica; font-size: 14pt;  } h4 { font-size: 12pt; font-weight: normal; font-style: normal; font-family: Verdana, Arial, Helvetica;  } h5 { font-family: Verdana, Arial, Helvetica; font-size: 10pt; font-weight: normal; font-style: normal;  } h6 { font-family: arial; text-align: none; vertical-align: none; font-weight: normal; font-style: normal; font-size: 8pt;  } label { font-style: normal; font-size: 8pt; font-family: Trebuchet MS, Arial, Helvetica;  } label, .mstheme-label { font-style: normal; font-family: Trebuchet MS, Arial, Helvetica; font-size: 8pt;  } legend { font-style: normal; font-family: Verdana, Arial, Helvetica; font-size: 8pt;  } marquee { font-size: 14pt; font-family: Trebuchet MS, Arial, Helvetica;  } select { border-style:solid; font-style: normal; font-size: 8pt; font-family: Trebuchet MS, Arial, Helvetica;   } table { font-weight: normal; font-family: Arial; text-align: none; font-size: 10pt; font-style: normal; vertical-align: none;  } textarea { border-style:solid; font-style: normal; font-size: 8pt; font-family: Trebuchet MS, Arial, Helvetica;   } th { font-style: normal; font-family: Trebuchet MS, Arial, Helvetica;  } 

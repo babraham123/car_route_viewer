@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>RC Car: Map Viewer</title>
+  <meta name="author" content="Bereket Abraham">
+  <meta name="description" content="Robotic Systems and Internet of Things: 24-788, Carnegie Mellon University, RC car map viewer" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+  <link rel="icon" href="media/favicon.ico" type="image/x-icon" >
+  <link rel="shortcut icon" href="media/favicon.ico" type="image/x-icon" >
+
+  <!-- use /media /static in production -->
+  <link rel="stylesheet" href="static/bootstrap.min.css">
+  <link rel="stylesheet" href="static/bootstrap-theme.min.css">
+
+  <link rel="stylesheet" type="text/css" href="static/ks21011.css"><meta name="Microsoft Theme" content="ks2 1011, default">
+  <meta name="Microsoft Border" content="tb, default">
+</head>
+<body>
+<div class="container">
+  <div class="page-header">
+    <h1>RC Car: Map Viewer</h1>
+    <p class="lead">Download and visualize the planned routes for your RC car.</p>
+  </div>
+
+  <h3>Username</h3>
+  <p>Insert your username and press Submit.</p>
+  <div class="row">
+    <div class="col-xs-12 col-md-6">
+      <form class="navbar-form navbar-left" role="search" id="usernameform">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="jsmith">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+      </form>
+    </div>
+  </div>
+
+  <div id="carsPane" style="display:none;">
+    <h3>RC Cars</h3>
+    <p>Select the correct RC car.</p>
+    <table class="table table-bordered" id="carsTable">
+      <tbody>
+        <tr class="clickable-row" id="tCar0" style="display:none;">
+          <th>Example RC Car</th>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div id="routesPane" style="display:none;">
+    <h3>Routes</h3>
+    <p>Select a planned route to visualize.</p>
+    <table class="table table-bordered" id="routesTable">
+      <tbody>
+        <tr class="clickable-row" id="tRoute0" style="display:none;">
+          <th>Example Route</th>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  
+  <div id="vizPane" style="display:none;">
+    <h3>Visualization</h3>
+  </div> 
+
+  <br/>
+  <br/>
+  <div class="row text-center">
+    <a href="http://www.andrew.cmu.edu/course/24-662"><img src="media/seal.jpg"></a>
+  </div>
+
+</div>
+
+<script src="static/jquery-3.1.1.min.js"></script>
+<script src="static/bootstrap.min.js"></script>
+<script src="static/d3.min.js"></script>
+<script src="static/jsnetworkx.js"></script>
+<script src="network.js"></script>
+
+</body>
