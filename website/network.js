@@ -7,9 +7,13 @@ var url = "http://cerlab29.andrew.cmu.edu/",
     currCarId = null;
 
 var init = function() {
+    getMap();
+    getCars();
+
     // if failure???
     $('#usernameform').submit(function(e) {
         username = $('#usernameform input').text();
+        console.log('user = ' + username);
         getRoutes( username );
         e.preventDefault();
     });
@@ -21,7 +25,7 @@ var init = function() {
 
     $('#routesTable').on('click', '.clickable-row', function(e) {
         $(this).addClass('active').siblings().removeClass('active');
-        var currRoute = $(this).children('th').first().value(); // .attr('id');
+        var currRoute = $(this).children('th').first().text(); // .attr('id');
         getRouteNodes( currRoute );
     });
 
@@ -29,8 +33,6 @@ var init = function() {
     //     // do something
     // });
 
-    getMap();
-    getCars();
     console.log('initialized');
 }
 
@@ -41,6 +43,8 @@ var getMap = function() {
         function(data) {
             map.nodes = data.node;
             map.edges = data.edge;
+
+            console.log('map: ' + JSON.stringify(map) );
         }
     );
 }
@@ -54,6 +58,7 @@ var getCars = function() {
                 cars.append({"r_id":val.r_id, "r_name":val.r_name});
             });
 
+            console.log('cars: ' + JSON.stringify(cars) );
             updateCarTable(cars);
         }
     );
@@ -68,6 +73,7 @@ var getRoutes = function(_user) {
                 routes.append({"p_id":val.p_id, "p_name":val.p_name});
             });
 
+            console.log("routes: " + JSON.stringify(routes));
             updateRouteTable(routes);
         }
     );
@@ -86,7 +92,7 @@ var updateCarTable = function(_cars) {
 
     $.each(_cars, function(i, val) {
         var row = template.clone();
-        row.children('th').value(val.r_name);
+        row.children('th').text(val.r_name);
         row.attr('id', String(val.r_id));
         row.show().appendTo( template.parent() );
     });
@@ -107,7 +113,7 @@ var updateRouteTable = function(_routes) {
 
     $.each(_routes, function(i, val) {
         var row = template.clone();
-        row.children('th').value(val.p_name);
+        row.children('th').text(val.p_name);
         row.attr('id', String(val.p_id));
         row.show().appendTo( template.parent() );
     });
