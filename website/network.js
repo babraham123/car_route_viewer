@@ -13,7 +13,7 @@ var init = function() {
     // if failure???
     $('#usernameform').submit(function(e) {
         username = $('#usernameform input').text();
-        console.log('user = ' + username);
+        console.log('user: ' + username);
         getRoutes( username );
         e.preventDefault();
     });
@@ -41,12 +41,16 @@ var getMap = function() {
     $.post(url + "IoRT/php/car_map_r.php",
         {},
         function(data) {
+            console.log("car_map_r: " + JSON.stringify(data));
+
             map.nodes = data.node;
             map.edges = data.edge;
 
             console.log('map: ' + JSON.stringify(map) );
         }
-    );
+    ).fail(function() {
+        console.log("car_map_r error");
+    });
 }
 
 var getCars = function() {
@@ -54,6 +58,8 @@ var getCars = function() {
     $.post(url + "IoRT/php/car_r.php",
         {},
         function(data) {
+            console.log("car_r: " + JSON.stringify(data));
+
             $.each(data.data, function(i, val) {
                 cars.append({"r_id":val.r_id, "r_name":val.r_name});
             });
@@ -61,14 +67,18 @@ var getCars = function() {
             console.log('cars: ' + JSON.stringify(cars) );
             updateCarTable(cars);
         }
-    );
+    ).fail(function() {
+        console.log("car_r error");
+    });
 }
 
 var getRoutes = function(_user) {
     var routes = [];
     $.post(url + "IoRT/php/car_prog_r.php",
-        {"u_name":_user},
+        {u_name: _user},
         function(data) {
+            console.log("car_prog_r: " + JSON.stringify(data));
+
             $.each(data.data, function(i, val) {
                 routes.append({"p_id":val.p_id, "p_name":val.p_name});
             });
@@ -76,7 +86,9 @@ var getRoutes = function(_user) {
             console.log("routes: " + JSON.stringify(routes));
             updateRouteTable(routes);
         }
-    );
+    ).fail(function() {
+        console.log("car_prog_r error");
+    });
 }
 
 var updateCarTable = function(_cars) {
@@ -129,8 +141,10 @@ var getRouteNodes = function(_route) {
         y = [];
 
     $.post(url + "IoRT/php/car_path_r.php",
-        {"u_name":username, "p_name": _route},
+        {u_name: username, p_name: _route},
         function(data) {
+            console.log("car_path_r: " + JSON.stringify(data));
+
             var path = data.path;
             path.sort(function(n1, n2) {
                 return (n1.seq - n2.seq);
@@ -142,9 +156,12 @@ var getRouteNodes = function(_route) {
                 y.append(path[i].pos_y);
             }
 
+            console.log("route nodes: " + JSON.stringify(routeNodes));
             updateRouteViz(routeNodes);
         }
-    );
+    ).fail(function() {
+        console.log("car_path_r error");
+    });
 }
 
 var updateRouteViz = function(routeNodes) {
