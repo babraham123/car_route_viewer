@@ -7,6 +7,8 @@ API Author: Tomotake Furuhata
 ssh username@cerlab29.andrew.cmu.edu
 ls /home/tomotake/IoRT/car
 ls /home/tomotake/IoRT/php
+
+ls /var/www/html/IoRT/php/
 ```
 
 ### Query data through API
@@ -15,7 +17,7 @@ ls /home/tomotake/IoRT/php
 curl -i -H "Content-Type: application/json" -X POST http://cerlab29.andrew.cmu.edu/IoRT/php/car_r.php --data '{"u_name":"tomotake"}'
 
 # read path
-curl -i -H "Content-Type: application/json" -X POST http://cerlab29.andrew.cmu.edu/IoRT/php/car_path_r.php --data '{"u_name":"tomotake", "p_name":"proj1"}'
+curl -i -H "Content-Type: application/json" -X POST http://cerlab29.andrew.cmu.edu/IoRT/php/car_path_r.php --data '{"u_name":"tomotake", "p_name":"prog1"}'
 
 # read map
 curl -i -H "Content-Type: application/json" -X POST http://cerlab29.andrew.cmu.edu/IoRT/php/car_map_r.php --data '{}'
@@ -28,18 +30,18 @@ curl -i -H "Content-Type: application/json" -X POST http://cerlab29.andrew.cmu.e
 ```json
 {"ret":1,"data":[{"p_name":"prog1","p_id":"1","c_time":"2016-11-15 10:04:36"},{"p_name":"prog2","p_id":"2","c_time":"2016-11-15 10:04:36"}]}
 
-
+{"result":true,"path":[{"seq":"1","pos_x":"1910","pos_y":"40","name":"n020"},{"seq":"2","pos_x":"1110","pos_y":"240","name":"n052"},{"seq":"3","pos_x":"510","pos_y":"240","name":"n046"},{"seq":"4","pos_x":"10","pos_y":"740","name":"n141"},{"seq":"5","pos_x":"10","pos_y":"1040","name":"n201"}]}
 ```
 
 ### Variables
-u_name, p_name
+u_name
+p_name, p_id
 m_name
 r_id, r_name
 c_id, c_time
 n_name, pos_x, pos_y
 e_name, n1_name, n2_name
 
-Does car = user?
 
 mysql -u iort --password=ShimadaKenji
 use iort;
