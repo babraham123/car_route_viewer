@@ -141,6 +141,8 @@ var getRouteNodes = function(_route) {
     $.post(url + "IoRT/php/car_path_r.php",
         JSON.stringify({u_name: username, p_name: _route}),
         function(data) {
+            console.log(JSON.stringify(data));
+
             var path = data.path;
             path.sort(function(n1, n2) {
                 return (n1.seq - n2.seq);
@@ -150,7 +152,7 @@ var getRouteNodes = function(_route) {
                 x = [];
                 y = [];
 
-            for (i = 0; i < path.length; i++) {
+            for (var i = 0; i < path.length; i++) {
                 routeNodes.push(path[i].name);
                 x.push(path[i].pos_x);
                 y.push(path[i].pos_y);
@@ -160,9 +162,10 @@ var getRouteNodes = function(_route) {
             updateRouteViz(routeNodes);
         },
         'json'
-    ).fail(function() {
-        console.log("car_path_r error");
-    });
+    );
+    // .fail(function() {
+    //     console.log("car_path_r error");
+    // });
 }
 
 var updateRouteViz = function(routeNodes) {
