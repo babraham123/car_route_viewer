@@ -170,13 +170,12 @@ var getRouteNodes = function(_route) {
 
 var updateRouteViz = function(routeNodes) {
     var pane = $('#vizPane');
-
     if(pane.is(":visible")) {
         pane.slideUp();
     }
+    $('#vizCanvas').children('svg').remove();
 
     var graph = new jsnx.Graph();
-    pane.children('canvas').remove();
 
     $.each(map.nodes, function(i, val) {
         graph.addNode(val.n_name, {color: 'black'});
@@ -195,7 +194,7 @@ var updateRouteViz = function(routeNodes) {
     pane.slideDown();
 
     jsnx.draw(graph, {
-        element: '#vizPane',
+        element: '#vizCanvas',
         withLabels: true,
         nodeStyle: {
             fill: function(d) {
