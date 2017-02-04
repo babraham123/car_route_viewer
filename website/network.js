@@ -21,13 +21,13 @@ var init = function() {
     $('#carsTable').on('click', '.clickable-row', function(e) {
         $(this).addClass('active').siblings().removeClass('active');
 
-        console.log($(this).children('th').first().val());
+        console.log($(this).children('th').first().text());
         var currCarId = $(this).attr('id');
     });
 
     $('#routesTable').on('click', '.clickable-row', function(e) {
         $(this).addClass('active').siblings().removeClass('active');
-        var currRoute = $(this).children('th').first().val(); // .attr('id');
+        var currRoute = $(this).children('th').first().text(); // .attr('id');
 
         console.log(currRoute);
         getRouteNodes( currRoute );
