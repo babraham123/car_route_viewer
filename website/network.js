@@ -45,8 +45,6 @@ var getMap = function() {
     $.post(url + "IoRT/php/car_map_r.php",
         {},
         function(data) {
-            data = JSON.parse(data);
-
             map.nodes = data.node;
             map.edges = data.edge;
 
@@ -62,8 +60,6 @@ var getCars = function() {
     $.post(url + "IoRT/php/car_r.php",
         {},
         function(data) {
-            data = JSON.parse(data);
-
             var cars = [];
             $.each(data.data, function(i, val) {
                 cars.push({"r_id":val.r_id, "r_name":val.r_name});
@@ -80,11 +76,8 @@ var getCars = function() {
 
 var getRoutes = function(_user) {
     $.post(url + "IoRT/php/car_prog_r.php",
-        {u_name: _user},
+        JSON.stringify({u_name: _user}),
         function(data) {
-            console.log(data);
-            data = JSON.parse(data);
-
             var routes = [];
             $.each(data.data, function(i, val) {
                 routes.push({"p_id":val.p_id, "p_name":val.p_name});
@@ -112,7 +105,7 @@ var updateCarTable = function(_cars) {
 
     $.each(_cars, function(i, val) {
         var row = template.clone();
-        row.children('th').val(val.r_name);
+        row.children('th').first().val(val.r_name);
         row.attr('id', String(val.r_id));
         row.show().appendTo( template.parent() );
     });
@@ -133,7 +126,7 @@ var updateRouteTable = function(_routes) {
 
     $.each(_routes, function(i, val) {
         var row = template.clone();
-        row.children('th').val(val.p_name);
+        row.children('th').first().val(val.p_name);
         row.attr('id', String(val.p_id));
         row.show().appendTo( template.parent() );
     });
@@ -146,10 +139,8 @@ var updateRouteTable = function(_routes) {
 var getRouteNodes = function(_route) {
 
     $.post(url + "IoRT/php/car_path_r.php",
-        {u_name: username, p_name: _route},
+        JSON.stringify({u_name: username, p_name: _route}),
         function(data) {
-            data = JSON.parse(data);
-
             var path = data.path;
             path.sort(function(n1, n2) {
                 return (n1.seq - n2.seq);
