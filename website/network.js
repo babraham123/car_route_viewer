@@ -203,11 +203,13 @@ var updateRouteViz = function(routeNodes) {
             }
         },
         edgeStyle: { 
-            stroke: function(d) {
+            fill: function(d) {
                 return d.data.color;
-            } 
-            //'stroke-width': 2
-        }
+            },
+            'stroke-width': 10
+        },
+        labelStyle: {fill: 'white'},
+        stickyDrag: true
     });
 }
 
