@@ -12,7 +12,7 @@ var init = function() {
 
     // if failure???
     $('#usernameform').submit(function(e) {
-        username = $('#usernameform input').text();
+        username = $('#usernameinput').val();
         console.log('user: ' + username);
         getRoutes( username );
         e.preventDefault();
@@ -20,12 +20,16 @@ var init = function() {
 
     $('#carsTable').on('click', '.clickable-row', function(e) {
         $(this).addClass('active').siblings().removeClass('active');
+
+        console.log($(this).children('th').first().val());
         var currCarId = $(this).attr('id');
     });
 
     $('#routesTable').on('click', '.clickable-row', function(e) {
         $(this).addClass('active').siblings().removeClass('active');
-        var currRoute = $(this).children('th').first().text(); // .attr('id');
+        var currRoute = $(this).children('th').first().val(); // .attr('id');
+
+        console.log(currRoute);
         getRouteNodes( currRoute );
     });
 
@@ -42,7 +46,6 @@ var getMap = function() {
         {},
         function(data) {
             data = JSON.parse(data);
-            console.log("car_map_r: " + JSON.stringify(data));
 
             map.nodes = data.node;
             map.edges = data.edge;
@@ -59,11 +62,10 @@ var getCars = function() {
         {},
         function(data) {
             data = JSON.parse(data);
-            console.log("car_r: " + JSON.stringify(data));
 
             var cars = [];
             $.each(data.data, function(i, val) {
-                cars.peush({"r_id":val.r_id, "r_name":val.r_name});
+                cars.push({"r_id":val.r_id, "r_name":val.r_name});
             });
 
             console.log('cars: ' + JSON.stringify(cars) );
@@ -79,7 +81,6 @@ var getRoutes = function(_user) {
         {u_name: _user},
         function(data) {
             data = JSON.parse(data);
-            console.log("car_prog_r: " + JSON.stringify(data));
 
             var routes = [];
             $.each(data.data, function(i, val) {
@@ -107,7 +108,7 @@ var updateCarTable = function(_cars) {
 
     $.each(_cars, function(i, val) {
         var row = template.clone();
-        row.children('th').text(val.r_name);
+        row.children('th').val(val.r_name);
         row.attr('id', String(val.r_id));
         row.show().appendTo( template.parent() );
     });
@@ -128,7 +129,7 @@ var updateRouteTable = function(_routes) {
 
     $.each(_routes, function(i, val) {
         var row = template.clone();
-        row.children('th').text(val.p_name);
+        row.children('th').val(val.p_name);
         row.attr('id', String(val.p_id));
         row.show().appendTo( template.parent() );
     });
@@ -144,7 +145,6 @@ var getRouteNodes = function(_route) {
         {u_name: username, p_name: _route},
         function(data) {
             data = JSON.parse(data);
-            console.log("car_path_r: " + JSON.stringify(data));
 
             var path = data.path;
             path.sort(function(n1, n2) {
