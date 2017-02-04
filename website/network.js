@@ -105,7 +105,7 @@ var updateCarTable = function(_cars) {
 
     $.each(_cars, function(i, val) {
         var row = template.clone();
-        row.children('th').first().val(val.r_name);
+        row.children('th').text(val.r_name);
         row.attr('id', String(val.r_id));
         row.show().appendTo( template.parent() );
     });
@@ -126,7 +126,7 @@ var updateRouteTable = function(_routes) {
 
     $.each(_routes, function(i, val) {
         var row = template.clone();
-        row.children('th').first().val(val.p_name);
+        row.children('th').text(val.p_name);
         row.attr('id', String(val.p_id));
         row.show().appendTo( template.parent() );
     });
@@ -179,7 +179,7 @@ var updateRouteViz = function(routeNodes) {
         graph.addNode(val.n_name, {color: 'black'});
     });
 
-    for (i = 0; i < (routeNodes.length - 1); i++) {
+    for (var i = 0; i < (routeNodes.length - 1); i++) {
         graph.addEdge(routeNodes[i], routeNodes[i+1], {color: 'green'});
     }
 
