@@ -51,7 +51,8 @@ var getMap = function() {
             map.edges = data.edge;
 
             console.log('map: ' + JSON.stringify(map) );
-        }
+        },
+        'json'
     ).fail(function() {
         console.log("car_map_r error");
     });
@@ -70,7 +71,8 @@ var getCars = function() {
 
             console.log('cars: ' + JSON.stringify(cars) );
             updateCarTable(cars);
-        }
+        },
+        'json'
     ).fail(function() {
         console.log("car_r error");
     });
@@ -90,7 +92,8 @@ var getRoutes = function(_user) {
 
             console.log("routes: " + JSON.stringify(routes));
             updateRouteTable(routes);
-        }
+        },
+        'json'
     ).fail(function() {
         console.log("car_prog_r error");
     });
@@ -164,7 +167,8 @@ var getRouteNodes = function(_route) {
 
             console.log("route nodes: " + JSON.stringify(routeNodes));
             updateRouteViz(routeNodes);
-        }
+        },
+        'json'
     ).fail(function() {
         console.log("car_path_r error");
     });
