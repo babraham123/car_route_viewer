@@ -209,7 +209,7 @@ var updateRouteViz = function(routeNodes) {
         },
         labelStyle: {
             fill: 'white',
-            'font-size', '12px'
+            'font-size': '12px'
         },
         stickyDrag: true
     });
