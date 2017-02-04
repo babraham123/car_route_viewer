@@ -55,15 +55,15 @@ var getMap = function() {
 }
 
 var getCars = function() {
-    var cars = [];
     $.post(url + "IoRT/php/car_r.php",
         {},
         function(data) {
             data = JSON.parse(data);
             console.log("car_r: " + JSON.stringify(data));
 
+            var cars = [];
             $.each(data.data, function(i, val) {
-                cars.append({"r_id":val.r_id, "r_name":val.r_name});
+                cars.peush({"r_id":val.r_id, "r_name":val.r_name});
             });
 
             console.log('cars: ' + JSON.stringify(cars) );
@@ -75,15 +75,15 @@ var getCars = function() {
 }
 
 var getRoutes = function(_user) {
-    var routes = [];
     $.post(url + "IoRT/php/car_prog_r.php",
         {u_name: _user},
         function(data) {
             data = JSON.parse(data);
             console.log("car_prog_r: " + JSON.stringify(data));
 
+            var routes = [];
             $.each(data.data, function(i, val) {
-                routes.append({"p_id":val.p_id, "p_name":val.p_name});
+                routes.push({"p_id":val.p_id, "p_name":val.p_name});
             });
 
             console.log("routes: " + JSON.stringify(routes));
@@ -139,9 +139,6 @@ var updateRouteTable = function(_routes) {
 // use route name, not id
 // node = {"seq":"1","pos_x":"1910","pos_y":"40","name":"n020"}
 var getRouteNodes = function(_route) {
-    var routeNodes = [],
-        x = [];
-        y = [];
 
     $.post(url + "IoRT/php/car_path_r.php",
         {u_name: username, p_name: _route},
@@ -154,10 +151,14 @@ var getRouteNodes = function(_route) {
                 return (n1.seq - n2.seq);
             });
 
+            var routeNodes = [],
+                x = [];
+                y = [];
+
             for (i = 0; i < path.length; i++) {
-                routeNodes.append(path[i].name);
-                x.append(path[i].pos_x);
-                y.append(path[i].pos_y);
+                routeNodes.push(path[i].name);
+                x.push(path[i].pos_x);
+                y.push(path[i].pos_y);
             }
 
             console.log("route nodes: " + JSON.stringify(routeNodes));
