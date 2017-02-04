@@ -80,6 +80,7 @@ var getRoutes = function(_user) {
     $.post(url + "IoRT/php/car_prog_r.php",
         {u_name: _user},
         function(data) {
+            console.log(data);
             data = JSON.parse(data);
 
             var routes = [];
