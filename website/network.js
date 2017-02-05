@@ -174,7 +174,7 @@ var updateRouteViz = function(routeNodes) {
         pane.slideUp();
     }
     $('#vizCanvas').children('svg').remove();
-    $('#vizText').text(JSON.stringify(routeNodes));
+    $('#vizText').text('Route Nodes: ' + JSON.stringify(routeNodes));
 
     var graph = new jsnx.Graph();
 
@@ -182,15 +182,15 @@ var updateRouteViz = function(routeNodes) {
         graph.addNode(val.n_name, {color: 'black'});
     });
 
-    for (var i = 0; i < (routeNodes.length - 1); i++) {
-        graph.addEdge(routeNodes[i], routeNodes[i+1], {color: 'green'});
-    }
-
     $.each(map.edges, function(i, val) {
         if(($.inArray(val.n1_name, routeNodes) == -1) || ($.inArray(val.n2_name, routeNodes) == -1)) {
             graph.addEdge(val.n1_name, val.n2_name, {color: 'black'});
         }
     });
+
+    for (var i = 0; i < (routeNodes.length - 1); i++) {
+        graph.addEdge(routeNodes[i], routeNodes[i+1], {color: 'green'});
+    }
 
     pane.slideDown();
 
