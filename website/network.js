@@ -174,6 +174,7 @@ var updateRouteViz = function(routeNodes) {
         pane.slideUp();
     }
     $('#vizCanvas').children('svg').remove();
+    $('#vizText').text(JSON.stringify(routeNodes));
 
     var graph = new jsnx.Graph();
 
