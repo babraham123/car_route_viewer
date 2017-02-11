@@ -207,7 +207,7 @@ var createNetworkX = function(routeNodes) {
     }
 
     jsnx.draw(graph, {
-        element: '#vizCanvas',
+        element: '#vizCanvas2',
         withLabels: true,
         nodeStyle: {
             fill: function(d) {
