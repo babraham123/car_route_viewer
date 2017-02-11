@@ -237,7 +237,7 @@ var createSigma = function(nodes) {
     });
 
     for (var i = 0; i < (nodes.length - 1); i++) {
-        edge = {"id": "p"+str(i), "source": nodes[i], "target": nodes[i+1], "color": 'green'};
+        edge = {"id": "p"+i.toString(), "source": nodes[i], "target": nodes[i+1], "color": 'green'};
         data.edges.push(edge);
     }
 
@@ -251,7 +251,7 @@ var dict2list = function(_dict) {
     var _list = [];
     $.each(_dict, function(key, val) {
         _list.push(val);
-    }
+    });
     return _list;
 }
 
