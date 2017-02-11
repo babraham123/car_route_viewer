@@ -28,6 +28,8 @@ curl -i -H "Content-Type: application/json" -X POST http://cerlab29.andrew.cmu.e
 
 ### API Results
 ```json
+{"node":{"n001":{"name":"n001","pos":[10,40]}},"edge":{"10":{"name":"10","n1":"n201","n2":"n206"}}}
+
 {"ret":1,"data":[{"p_name":"prog1","p_id":"1","c_time":"2016-11-15 10:04:36"},{"p_name":"prog2","p_id":"2","c_time":"2016-11-15 10:04:36"}]}
 
 {"result":true,"path":[{"seq":"1","pos_x":"1910","pos_y":"40","name":"n020"},{"seq":"2","pos_x":"1110","pos_y":"240","name":"n052"},{"seq":"3","pos_x":"510","pos_y":"240","name":"n046"},{"seq":"4","pos_x":"10","pos_y":"740","name":"n141"},{"seq":"5","pos_x":"10","pos_y":"1040","name":"n201"}]}

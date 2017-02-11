@@ -45,8 +45,8 @@ var getMap = function() {
     $.post(url + "IoRT/php/car_map_r.php",
         {},
         function(data) {
-            map.nodes = dict2list(data.nodes);
-            map.edges = dict2list(data.edges);
+            map.nodes = dict2list(data.node);
+            map.edges = dict2list(data.edge);
 
             console.log('map: ' + JSON.stringify(map) );
         },
@@ -141,7 +141,7 @@ var getRouteNodes = function(_route) {
     $.post(url + "IoRT/php/car_path_r.php",
         JSON.stringify({u_name: username, p_name: _route}),
         function(data) {
-            console.log(JSON.stringify(data));
+            // console.log(JSON.stringify(data));
 
             var path = data.path;
             path.sort(function(n1, n2) {
