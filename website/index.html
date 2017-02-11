@@ -16,12 +16,6 @@
 
   <link rel="stylesheet" type="text/css" href="static/ks21011.css"><meta name="Microsoft Theme" content="ks2 1011, default">
   <meta name="Microsoft Border" content="tb, default">
-  <style>
-    #vizCanvas {
-      overflow: hidden;
-      min-height: 100%;
-    }
-  </style>
 </head>
 
 <body>
@@ -70,8 +64,22 @@
 
   <div id="vizPane" class="container" style="display:none;">
     <h3>Visualization</h3>
-    <div id="vizCanvas"></div>
-    <br />
+
+    <ul class="nav nav-tabs">
+      <li class="active"><a href="#1" data-toggle="tab">Fixed Position</a></li>
+      <li><a href="#2" data-toggle="tab">Fluid Network</a></li>
+    </ul>
+
+    <div class="tab-content ">
+      <div class="tab-pane active" id="1">
+        <div id="vizCanvas" style="height: 500px;"></div>
+      </div>
+      <div class="tab-pane" id="2">
+        <div id="vizCanvas2" style="height: 500px;"></div>
+      </div>
+    </div>
+    
+    <hr>
     <p id="vizText"></p>
   </div> 
 
@@ -86,6 +94,7 @@
 <script src="static/jquery-3.1.1.min.js"></script>
 <script src="static/bootstrap.min.js"></script>
 <script src="static/d3.min.js"></script>
+<script src="static/sigma.min.js"></script>
 <script src="static/jsnetworkx.js"></script>
 <script src="network.js"></script>
 

@@ -168,29 +168,15 @@ var getRouteNodes = function(_route) {
     // });
 }
 
-var updateRouteViz = function(routeNodes) {
+var updateRouteViz = function(_nodes) {
     var pane = $('#vizPane');
     if(pane.is(":visible")) {
         pane.slideUp();
     }
-    $('#vizCanvas').children('svg').remove();
-    $('#vizText').text('Route Nodes: ' + JSON.stringify(routeNodes));
+    $('#vizText').text('Route Nodes: ' + JSON.stringify(_nodes));
 
-    var graph = new jsnx.Graph();
-
-    $.each(map.nodes, function(i, val) {
-        graph.addNode(val.n_name, {color: 'black'});
-    });
-
-    $.each(map.edges, function(i, val) {
-        if(($.inArray(val.n1_name, routeNodes) == -1) || ($.inArray(val.n2_name, routeNodes) == -1)) {
-            graph.addEdge(val.n1_name, val.n2_name, {color: 'black'});
-        }
-    });
-
-    for (var i = 0; i < (routeNodes.length - 1); i++) {
-        graph.addEdge(routeNodes[i], routeNodes[i+1], {color: 'green'});
-    }
+    createNetworkX(_nodes);
+    createSigma(_nodes);
 
     pane.slideDown();
 
@@ -213,6 +199,51 @@ var updateRouteViz = function(routeNodes) {
             'font-size': '12px'
         },
         stickyDrag: true
+    });
+}
+
+var createNetworkX = function(routeNodes) {
+    $('#vizCanvas2').children('svg').remove();
+    var graph = new jsnx.Graph();
+
+    $.each(map.nodes, function(i, val) {
+        graph.addNode(val.n_name, {color: 'black'});
+    });
+
+    $.each(map.edges, function(i, val) {
+        if(($.inArray(val.n1_name, routeNodes) == -1) || ($.inArray(val.n2_name, routeNodes) == -1)) {
+            graph.addEdge(val.n1_name, val.n2_name, {color: 'black'});
+        }
+    });
+
+    for (var i = 0; i < (routeNodes.length - 1); i++) {
+        graph.addEdge(routeNodes[i], routeNodes[i+1], {color: 'green'});
+    }
+}
+
+var createSigma = function(nodes) {
+    var data = {nodes: [], edges: []};
+
+    $.each(map.nodes, function(i, n) {
+        node = {"id": n.n_name, "label": n.n_name, "x": n.x_pos, "y": n.y_pos, "size": 3};
+        data.nodes.push(node);
+    });
+
+    $.each(map.edges, function(i, e) {
+        if(($.inArray(e.n1_name, nodes) == -1) || ($.inArray(e.n2_name, nodes) == -1)) {
+            edge = {"id": e.e_name, "source": e.n1_name, "target": e.n2_name, "color": 'black'};
+            data.edges.push(edge);
+        }
+    });
+
+    for (var i = 0; i < (nodes.length - 1); i++) {
+        edge = {"id": "p"+str(i), "source": nodes[i], "target": nodes[i+1], "color": 'green'};
+        data.edges.push(edge);
+    }
+
+     var s = new sigma({
+        graph: data,
+        container: 'vizCanvas'
     });
 }
 
