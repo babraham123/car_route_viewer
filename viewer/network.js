@@ -238,13 +238,13 @@ var createSigma = function(nodes) {
 
     $.each(map.edges, function(i, e) {
         if(($.inArray(e.n1, nodes) == -1) || ($.inArray(e.n2, nodes) == -1)) {
-            edge = {"id": "e"+e.name, "source": e.n1, "target": e.n2, "color": 'black'};
+            edge = {"id": "e"+e.name, "source": e.n1, "target": e.n2, "size": 2, "color": '#000000'};
             data.edges.push(edge);
         }
     });
 
     for (var i = 0; i < (nodes.length - 1); i++) {
-        edge = {"id": "p"+i.toString(), "source": nodes[i], "target": nodes[i+1], "color": 'green'};
+        edge = {"id": "p"+i.toString(), "source": nodes[i], "target": nodes[i+1], "size": 2, "color": '#40a823'};
         data.edges.push(edge);
     }
 
@@ -272,6 +272,8 @@ var enableUploadBtn = function() {
 
 var uploadRoute = function() {
     if(currCar && currRoute) {
+        // TODO: make an API call to cause the car to follow the chosen route
+
         console.log("Upload (car,route): " + currCar + ", " + currRoute);
     }
 }
