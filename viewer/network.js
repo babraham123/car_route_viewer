@@ -188,6 +188,40 @@ var updateRouteViz = function(_nodes) {
     createSigma(_nodes);    
 }
 
+var createSigma = function(nodes) {
+    var data = {nodes: [], edges: []},
+        nsize = 4,
+        esize = 3;
+
+    $.each(map.nodes, function(i, n) {
+        node = {"id": n.name, "label": n.name, "x": n.pos[0], "y": n.pos[1], "size": nsize};
+        data.nodes.push(node);
+    });
+
+    $.each(map.edges, function(i, e) {
+        if(($.inArray(e.n1, nodes) == -1) || ($.inArray(e.n2, nodes) == -1)) {
+            edge = {"id": "e"+e.name, "source": e.n1, "target": e.n2, "size": esize, "color": '#000000'};
+            data.edges.push(edge);
+        }
+    });
+
+    for (var i = 0; i < (nodes.length - 1); i++) {
+        edge = {"id": "p"+i.toString(), "source": nodes[i], "target": nodes[i+1], "size": esize, "color": '#40a823'};
+        data.edges.push(edge);
+    }
+
+     var s = new sigma({
+        graph: data,
+        container: 'vizCanvas',
+        settings: {
+            maxNodeSize: nsize,
+            minNodeSize: nsize,
+            minEdgeSize: esize,
+            maxEdgeSize: esize
+        }
+    });
+}
+
 var createNetworkX = function(routeNodes) {
     $('#vizCanvas2').children('svg').remove();
     var graph = new jsnx.Graph();
@@ -225,38 +259,6 @@ var createNetworkX = function(routeNodes) {
             'font-size': '12px'
         },
         stickyDrag: true
-    });
-}
-
-var createSigma = function(nodes) {
-    var data = {nodes: [], edges: []};
-
-    $.each(map.nodes, function(i, n) {
-        node = {"id": n.name, "label": n.name, "x": n.pos[0], "y": n.pos[1], "size": 3};
-        data.nodes.push(node);
-    });
-
-    $.each(map.edges, function(i, e) {
-        if(($.inArray(e.n1, nodes) == -1) || ($.inArray(e.n2, nodes) == -1)) {
-            edge = {"id": "e"+e.name, "source": e.n1, "target": e.n2, "size": 2, "color": '#000000'};
-            data.edges.push(edge);
-        }
-    });
-
-    for (var i = 0; i < (nodes.length - 1); i++) {
-        edge = {"id": "p"+i.toString(), "source": nodes[i], "target": nodes[i+1], "size": 2, "color": '#40a823'};
-        data.edges.push(edge);
-    }
-
-     var s = new sigma({
-        graph: data,
-        container: 'vizCanvas',
-        settings: {
-            maxNodeSize: 3,
-            minNodeSize: 3,
-            minEdgeSize: 2,
-            maxEdgeSize: 2
-        }
     });
 }
 
