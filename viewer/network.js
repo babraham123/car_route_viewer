@@ -182,10 +182,29 @@ var updateRouteViz = function(_nodes) {
     }
     $('#vizText').text('Route Nodes: ' + JSON.stringify(_nodes));
 
-    createNetworkX(_nodes);
-    createSigma(_nodes);
-
     pane.slideDown();
+
+    createNetworkX(_nodes);
+    createSigma(_nodes);    
+}
+
+var createNetworkX = function(routeNodes) {
+    $('#vizCanvas2').children('svg').remove();
+    var graph = new jsnx.Graph();
+
+    $.each(map.nodes, function(i, val) {
+        graph.addNode(val.name, {color: 'black'});
+    });
+
+    $.each(map.edges, function(i, val) {
+        if(($.inArray(val.n1, routeNodes) == -1) || ($.inArray(val.n2, routeNodes) == -1)) {
+            graph.addEdge(val.n1, val.n2, {color: 'black'});
+        }
+    });
+
+    for (var i = 0; i < (routeNodes.length - 1); i++) {
+        graph.addEdge(routeNodes[i], routeNodes[i+1], {color: 'green'});
+    }
 
     jsnx.draw(graph, {
         element: '#vizCanvas',
@@ -207,25 +226,6 @@ var updateRouteViz = function(_nodes) {
         },
         stickyDrag: true
     });
-}
-
-var createNetworkX = function(routeNodes) {
-    $('#vizCanvas2').children('svg').remove();
-    var graph = new jsnx.Graph();
-
-    $.each(map.nodes, function(i, val) {
-        graph.addNode(val.name, {color: 'black'});
-    });
-
-    $.each(map.edges, function(i, val) {
-        if(($.inArray(val.n1, routeNodes) == -1) || ($.inArray(val.n2, routeNodes) == -1)) {
-            graph.addEdge(val.n1, val.n2, {color: 'black'});
-        }
-    });
-
-    for (var i = 0; i < (routeNodes.length - 1); i++) {
-        graph.addEdge(routeNodes[i], routeNodes[i+1], {color: 'green'});
-    }
 }
 
 var createSigma = function(nodes) {
