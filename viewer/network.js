@@ -250,7 +250,13 @@ var createSigma = function(nodes) {
 
      var s = new sigma({
         graph: data,
-        container: 'vizCanvas'
+        container: 'vizCanvas',
+        settings: {
+            maxNodeSize: 3,
+            minNodeSize: 3,
+            minEdgeSize: 2,
+            maxEdgeSize: 2
+        }
     });
 }
 
@@ -274,7 +280,7 @@ var uploadRoute = function() {
     if(currCar && currRoute) {
         // TODO: make an API call to cause the car to follow the chosen route
 
-        console.log("Upload (car,route): " + currCar + ", " + currRoute);
+        console.log("Upload (car,route): (" + currCar + ", " + currRoute + ")");
     }
 }
 
