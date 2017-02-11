@@ -4,7 +4,8 @@ var _self = this;
 var url = "http://cerlab29.andrew.cmu.edu/",
     map = {nodes: [], edges: []},
     username = null,
-    currCarId = null;
+    currCar = null,
+    currRoute = null;
 
 var init = function() {
     getMap();
@@ -21,16 +22,22 @@ var init = function() {
     $('#carsTable').on('click', '.clickable-row', function(e) {
         $(this).addClass('active').siblings().removeClass('active');
 
-        console.log($(this).children('th').first().text());
-        var currCarId = $(this).attr('id');
+        currCar = $(this).children('th').first().text(); // .attr('id');
+        console.log(currCar);
+        enableUploadBtn();
     });
 
     $('#routesTable').on('click', '.clickable-row', function(e) {
         $(this).addClass('active').siblings().removeClass('active');
-        var currRoute = $(this).children('th').first().text(); // .attr('id');
 
+        currRoute = $(this).children('th').first().text(); // .attr('id');
         console.log(currRoute);
         getRouteNodes( currRoute );
+        enableUploadBtn();
+    });
+
+    $('#uploadBtn').on('click', function (e) {
+        uploadRoute();
     });
 
     // $('#clearbtn').click(function() {
@@ -253,6 +260,20 @@ var dict2list = function(_dict) {
         _list.push(val);
     });
     return _list;
+}
+
+var enableUploadBtn = function() {
+    if(currCar && currRoute) {
+        $('#uploadBtn').prop('disabled', false);
+    } else {
+        $('#uploadBtn').prop('disabled', true);
+    }
+}
+
+var uploadRoute = function() {
+    if(currCar && currRoute) {
+        console.log("Upload (car,route): " + currCar + ", " + currRoute);
+    }
 }
 
 init();
