@@ -45,8 +45,8 @@ var getMap = function() {
     $.post(url + "IoRT/php/car_map_r.php",
         {},
         function(data) {
-            map.nodes = data.node;
-            map.edges = data.edge;
+            map.nodes = dict2list(data.nodes);
+            map.edges = dict2list(data.edges);
 
             console.log('map: ' + JSON.stringify(map) );
         },
@@ -135,7 +135,7 @@ var updateRouteTable = function(_routes) {
 }
 
 // use route name, not id
-// node = {"seq":"1","pos_x":"1910","pos_y":"40","name":"n020"}
+// node = {"seq":"1","pos":[1910,40],"name":"n020"}
 var getRouteNodes = function(_route) {
 
     $.post(url + "IoRT/php/car_path_r.php",
@@ -154,8 +154,8 @@ var getRouteNodes = function(_route) {
 
             for (var i = 0; i < path.length; i++) {
                 routeNodes.push(path[i].name);
-                x.push(path[i].pos_x);
-                y.push(path[i].pos_y);
+                x.push(path[i].pos[0]);
+                y.push(path[i].pos[1]);
             }
 
             console.log("route nodes: " + JSON.stringify(routeNodes));
@@ -207,12 +207,12 @@ var createNetworkX = function(routeNodes) {
     var graph = new jsnx.Graph();
 
     $.each(map.nodes, function(i, val) {
-        graph.addNode(val.n_name, {color: 'black'});
+        graph.addNode(val.name, {color: 'black'});
     });
 
     $.each(map.edges, function(i, val) {
-        if(($.inArray(val.n1_name, routeNodes) == -1) || ($.inArray(val.n2_name, routeNodes) == -1)) {
-            graph.addEdge(val.n1_name, val.n2_name, {color: 'black'});
+        if(($.inArray(val.n1, routeNodes) == -1) || ($.inArray(val.n2, routeNodes) == -1)) {
+            graph.addEdge(val.n1, val.n2, {color: 'black'});
         }
     });
 
@@ -225,13 +225,13 @@ var createSigma = function(nodes) {
     var data = {nodes: [], edges: []};
 
     $.each(map.nodes, function(i, n) {
-        node = {"id": n.n_name, "label": n.n_name, "x": n.x_pos, "y": n.y_pos, "size": 3};
+        node = {"id": n.name, "label": n.name, "x": n.pos[0], "y": n.pos[1], "size": 3};
         data.nodes.push(node);
     });
 
     $.each(map.edges, function(i, e) {
-        if(($.inArray(e.n1_name, nodes) == -1) || ($.inArray(e.n2_name, nodes) == -1)) {
-            edge = {"id": e.e_name, "source": e.n1_name, "target": e.n2_name, "color": 'black'};
+        if(($.inArray(e.n1, nodes) == -1) || ($.inArray(e.n2, nodes) == -1)) {
+            edge = {"id": "e"+e.name, "source": e.n1, "target": e.n2, "color": 'black'};
             data.edges.push(edge);
         }
     });
@@ -245,6 +245,14 @@ var createSigma = function(nodes) {
         graph: data,
         container: 'vizCanvas'
     });
+}
+
+var dict2list = function(_dict) {
+    var _list = [];
+    $.each(_dict, function(key, val) {
+        _list.push(val);
+    }
+    return _list;
 }
 
 init();
