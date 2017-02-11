@@ -1,0 +1,24 @@
+* 10/24/2016
+
+** assembly starts
+
+I finished bottom plate parts (4 motor, 1 motor amp, 3 line censors).
+
+* 10/25/2016
+
+** Pi mount
+
+Asked Ed to make 3 holes on the top plate to mount pi (he will make CAD
+drawing for the preparation of next 14 car kits.) Once the course number is
+decided, he wil charge it.
+
+** Initial status
+
+GPIO04 (pin 7) initial status: UP, others looks like low. Instead of PIN7, I use PIN12
+
+** H bridge (L298N)
+
+1. I need to short 2 connectors next to the 4 input pins.
+2. H Bridge can generate 5V, connect PIN2 & PIN6 of GPIO to power raspberry pi
+
+
