@@ -189,6 +189,8 @@ var updateRouteViz = function(_nodes) {
 }
 
 var createSigma = function(nodes) {
+    $('#vizCanvas').children('canvas').remove();
+
     var data = {nodes: [], edges: []},
         nsize = 4,
         esize = 3;
