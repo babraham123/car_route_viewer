@@ -184,7 +184,6 @@ var updateRouteViz = function(_nodes) {
 
     pane.slideDown();
 
-    createNetworkX(_nodes);
     createSigma(_nodes);    
 }
 
@@ -221,46 +220,6 @@ var createSigma = function(nodes) {
             minEdgeSize: esize,
             maxEdgeSize: esize
         }
-    });
-}
-
-var createNetworkX = function(routeNodes) {
-    $('#vizCanvas2').children('svg').remove();
-    var graph = new jsnx.Graph();
-
-    $.each(map.nodes, function(i, val) {
-        graph.addNode(val.name, {color: 'black'});
-    });
-
-    $.each(map.edges, function(i, val) {
-        if(($.inArray(val.n1, routeNodes) == -1) || ($.inArray(val.n2, routeNodes) == -1)) {
-            graph.addEdge(val.n1, val.n2, {color: 'black'});
-        }
-    });
-
-    for (var i = 0; i < (routeNodes.length - 1); i++) {
-        graph.addEdge(routeNodes[i], routeNodes[i+1], {color: 'green'});
-    }
-
-    jsnx.draw(graph, {
-        element: '#vizCanvas2',
-        withLabels: true,
-        nodeStyle: {
-            fill: function(d) {
-                return d.data.color;
-            }
-        },
-        edgeStyle: { 
-            fill: function(d) {
-                return d.data.color;
-            },
-            'stroke-width': 10
-        },
-        labelStyle: {
-            fill: 'white',
-            'font-size': '12px'
-        },
-        stickyDrag: true
     });
 }
 
