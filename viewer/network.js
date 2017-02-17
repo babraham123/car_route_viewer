@@ -265,7 +265,11 @@ var createSigmaGraphTraffic = function() {
 
     s2 = new sigma({
         graph: data,
-        container: 'vizCanvas2',
+//        container: 'vizCanvas2',
+        renderer: {
+            container: document.getElementById('vizCanvas2'),
+            type: 'canvas'
+        },
         settings: {
             maxNodeSize: nsize,
             minNodeSize: nsize,
