@@ -218,7 +218,8 @@ var createSigmaGraph = function(nodes) {
             label: n.name, 
             x: n.pos[0], 
             y: n.pos[1], 
-            size: nsize
+            size: nsize,
+            color: '#cccccc'
         };
         data.nodes.push(node);
     });
@@ -267,37 +268,46 @@ var createSigmaGraphTraffic = function() {
         esize = 3;
 
     $.each(map.nodes, function(i, n) {
-        node = {
+        var node = {
             id: n.name, 
             label: n.name, 
             x: n.pos[0], 
             y: n.pos[1], 
-            size: nsize
+            size: nsize,
+            color: '#cccccc'
         };
         data.nodes.push(node);
     });
 
     $.each(map.edges, function(i, e) {
-        // TODO: edit color
-        // var color = $.colors( 'hsl(' + t.toString() + ',100%,50%)' ).toString('hex');
+        var c1, c2;
+        if(e.name in traffic) {
+            c1 = (120 * traffic[e.name][0]).toString();
+            c2 = (120 * traffic[e.name][1]).toString();
+            c1 = $.colors( 'hsl('+ c1 +',100%,50%)' ).toString('hex');
+            c2 = $.colors( 'hsl('+ c2 +',100%,50%)' ).toString('hex');
+        } else {
+            c1 = '#cccccc';
+            c2 = '#cccccc';
+        }
 
-        edge1 = {
+        var edge1 = {
             id: 'e'+e.name, 
             source: e.n1, 
             target: e.n2, 
             size: esize, 
-            color: '#000000', 
-            type: 'arrow',
-            count: 0
+            color: c1, 
+            type: 'curvedArrow',
+            count: -12
         };
-        edge2 = {
+        var edge2 = {
             id: 'e'+e.name+'b', 
             source: e.n2, 
             target: e.n1, 
             size: esize, 
             color: '#FF0000', 
-            type: 'arrow',
-            count: 1
+            type: 'curvedArrow',
+            count: -12
         };
         data.edges.push(edge1);
         data.edges.push(edge2);
@@ -305,7 +315,6 @@ var createSigmaGraphTraffic = function() {
 
     s2 = new sigma({
         graph: data,
-//        container: 'vizCanvas2',
         renderer: {
             container: document.getElementById('vizCanvas2'),
             type: 'canvas'
@@ -315,7 +324,7 @@ var createSigmaGraphTraffic = function() {
             minNodeSize: nsize,
             minEdgeSize: esize,
             maxEdgeSize: esize,
-            defaultEdgeTyoe: 'arrow'
+            defaultEdgeTyoe: 'curvedArrow'
         }
     });
 }
