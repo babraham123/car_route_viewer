@@ -3,9 +3,12 @@
 var _self = this;
 var url = "http://cerlab29.andrew.cmu.edu/",
     map = {nodes: [], edges: []},
+    traffic = {},
     username = null,
     currCar = null,
-    currRoute = null;
+    currRoute = null,
+    s = null,
+    s2 = null;
 
 var init = function() {
     getMap();
@@ -50,16 +53,30 @@ var init = function() {
 var getMap = function() {
     map = {nodes: [], edges: []};
     $.post(url + "IoRT/php/car_map_r.php",
-        {},
+        JSON.stringify({m_name: "all"}),
         function(data) {
             map.nodes = dict2list(data.node);
             map.edges = dict2list(data.edge);
 
-            console.log('map: ' + JSON.stringify(map) );
+            // console.log('map: ' + JSON.stringify(map) );
         },
         'json'
     ).fail(function() {
         console.log("car_map_r error");
+    });
+}
+
+
+var getTraffic = function() {
+    map = {nodes: [], edges: []};
+    $.post(url + "IoRT/php/car_traffic_map_r.php",
+        JSON.stringify({m_name: "all"}),
+        function(data) {
+            traffic = data.traffic;
+        },
+        'json'
+    ).fail(function() {
+        console.log("car_traffic_map_r error");
     });
 }
 
@@ -184,10 +201,11 @@ var updateRouteViz = function(_nodes) {
 
     pane.slideDown();
 
-    createSigma(_nodes);    
+    createSigmaGraph(_nodes);
+    createSigmaGraphTraffic();    
 }
 
-var createSigma = function(nodes) {
+var createSigmaGraph = function(nodes) {
     $('#vizCanvas').children('canvas').remove();
 
     var data = {nodes: [], edges: []},
@@ -211,9 +229,43 @@ var createSigma = function(nodes) {
         data.edges.push(edge);
     }
 
-     var s = new sigma({
+    s = new sigma({
         graph: data,
         container: 'vizCanvas',
+        settings: {
+            maxNodeSize: nsize,
+            minNodeSize: nsize,
+            minEdgeSize: esize,
+            maxEdgeSize: esize
+        }
+    });
+}
+
+var createSigmaGraphTraffic = function() {
+    $('#vizCanvas2').children('canvas').remove();
+
+    var data = {nodes: [], edges: []},
+        nsize = 4,
+        esize = 3;
+
+    $.each(map.nodes, function(i, n) {
+        node = {"id": n.name, "label": n.name, "x": n.pos[0], "y": n.pos[1], "size": nsize};
+        data.nodes.push(node);
+    });
+
+    $.each(map.edges, function(i, e) {
+        // TODO: edit color
+        // var color = $.colors( 'hsl(' + t.toString() + ',100%,50%)' ).toString('hex');
+
+        edge1 = {"id": "e"+e.name, "source": e.n1, "target": e.n2, "size": esize, "color": '#000000', "type": "arrow"}; // curvedArrow
+        edge2 = {"id": "e"+e.name, "source": e.n2, "target": e.n1, "size": esize, "color": '#FF0000', "type": "arrow"};
+        data.edges.push(edge1);
+        data.edges.push(edge2);
+    });
+
+    s2 = new sigma({
+        graph: data,
+        container: 'vizCanvas2',
         settings: {
             maxNodeSize: nsize,
             minNodeSize: nsize,
