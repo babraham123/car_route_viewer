@@ -257,8 +257,8 @@ var createSigmaGraphTraffic = function() {
         // TODO: edit color
         // var color = $.colors( 'hsl(' + t.toString() + ',100%,50%)' ).toString('hex');
 
-        edge1 = {"id": "e"+e.name, "source": e.n1, "target": e.n2, "size": esize, "color": '#000000', "type": "arrow"}; // curvedArrow
-        edge2 = {"id": "e"+e.name, "source": e.n2, "target": e.n1, "size": esize, "color": '#FF0000', "type": "arrow"};
+        edge1 = {"id": "e"+e.name, "source": e.n1, "target": e.n2, "size": esize, "color": '#000000', "type": 'curvedArrow'};
+        edge2 = {"id": "e"+e.name+"b", "source": e.n2, "target": e.n1, "size": esize, "color": '#FF0000', "type": 'curvedArrow'};
         data.edges.push(edge1);
         data.edges.push(edge2);
     });
@@ -270,7 +270,8 @@ var createSigmaGraphTraffic = function() {
             maxNodeSize: nsize,
             minNodeSize: nsize,
             minEdgeSize: esize,
-            maxEdgeSize: esize
+            maxEdgeSize: esize,
+            defaultEdgeTyoe: 'curvedArrow'
         }
     });
 }
