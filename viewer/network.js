@@ -12,6 +12,7 @@ var url = "http://cerlab29.andrew.cmu.edu/",
 
 var init = function() {
     getMap();
+    getTraffic();
     getCars();
 
     // if failure???
@@ -305,7 +306,7 @@ var createSigmaGraphTraffic = function() {
             source: e.n2, 
             target: e.n1, 
             size: esize, 
-            color: '#FF0000', 
+            color: c2, 
             type: 'curvedArrow',
             count: -12
         };
