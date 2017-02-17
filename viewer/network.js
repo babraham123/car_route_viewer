@@ -213,19 +213,37 @@ var createSigmaGraph = function(nodes) {
         esize = 3;
 
     $.each(map.nodes, function(i, n) {
-        node = {"id": n.name, "label": n.name, "x": n.pos[0], "y": n.pos[1], "size": nsize};
+        node = {
+            id: n.name, 
+            label: n.name, 
+            x: n.pos[0], 
+            y: n.pos[1], 
+            size: nsize
+        };
         data.nodes.push(node);
     });
 
     $.each(map.edges, function(i, e) {
         if(($.inArray(e.n1, nodes) == -1) || ($.inArray(e.n2, nodes) == -1)) {
-            edge = {"id": "e"+e.name, "source": e.n1, "target": e.n2, "size": esize, "color": '#000000'};
+            edge = {
+                id: 'e'+e.name, 
+                source: e.n1, 
+                target: e.n2, 
+                size: esize, 
+                color: '#000000'
+            };
             data.edges.push(edge);
         }
     });
 
     for (var i = 0; i < (nodes.length - 1); i++) {
-        edge = {"id": "p"+i.toString(), "source": nodes[i], "target": nodes[i+1], "size": esize, "color": '#40a823'};
+        edge = {
+            id: 'p'+i.toString(), 
+            source: nodes[i], 
+            target: nodes[i+1], 
+            size: esize, 
+            color: '#40a823'
+        };
         data.edges.push(edge);
     }
 
@@ -249,7 +267,13 @@ var createSigmaGraphTraffic = function() {
         esize = 3;
 
     $.each(map.nodes, function(i, n) {
-        node = {"id": n.name, "label": n.name, "x": n.pos[0], "y": n.pos[1], "size": nsize};
+        node = {
+            id: n.name, 
+            label: n.name, 
+            x: n.pos[0], 
+            y: n.pos[1], 
+            size: nsize
+        };
         data.nodes.push(node);
     });
 
@@ -257,8 +281,24 @@ var createSigmaGraphTraffic = function() {
         // TODO: edit color
         // var color = $.colors( 'hsl(' + t.toString() + ',100%,50%)' ).toString('hex');
 
-        edge1 = {"id": "e"+e.name, "source": e.n1, "target": e.n2, "size": esize, "color": '#000000', "type": 'curvedArrow'};
-        edge2 = {"id": "e"+e.name+"b", "source": e.n2, "target": e.n1, "size": esize, "color": '#FF0000', "type": 'curvedArrow'};
+        edge1 = {
+            id: 'e'+e.name, 
+            source: e.n1, 
+            target: e.n2, 
+            size: esize, 
+            color: '#000000', 
+            type: 'arrow',
+            count: 0
+        };
+        edge2 = {
+            id: 'e'+e.name+'b', 
+            source: e.n2, 
+            target: e.n1, 
+            size: esize, 
+            color: '#FF0000', 
+            type: 'arrow',
+            count: 1
+        };
         data.edges.push(edge1);
         data.edges.push(edge2);
     });
@@ -275,7 +315,7 @@ var createSigmaGraphTraffic = function() {
             minNodeSize: nsize,
             minEdgeSize: esize,
             maxEdgeSize: esize,
-            defaultEdgeTyoe: 'curvedArrow'
+            defaultEdgeTyoe: 'arrow'
         }
     });
 }
